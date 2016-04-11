@@ -13,7 +13,7 @@ SmartRCS
         :alt: Documentation Status
 
 
-Smart Rubik's Cube Solver robot for Raspberry Pi
+Smart Rubik's Cube Solver robot for Raspberry Pi written in Python.
 
 * Free software: ISC license
 * Documentation: https://smartrcs.readthedocs.org.
