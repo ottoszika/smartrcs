@@ -18,39 +18,39 @@ class TestColor(unittest.TestCase):
 
         # Test invalid red data (-1)
         with self.assertRaises(AttributeError):
-            color = Color(-1, 241, 42)
+            Color(-1, 241, 42)
 
         # Test invalid red data (256)
         with self.assertRaises(AttributeError):
-            color = Color(256, 241, 42)
+            Color(256, 241, 42)
 
         # Test invalid red data (3.14)
         with self.assertRaises(AttributeError):
-            color = Color(3.14, 241, 42)
+            Color(3.14, 241, 42)
 
         # Test invalid green data (-1)
         with self.assertRaises(AttributeError):
-            color = Color(121, -1, 42)
+            Color(121, -1, 42)
 
         # Test invalid green data (256)
         with self.assertRaises(AttributeError):
-            color = Color(121, 256, 42)
+            Color(121, 256, 42)
 
         # Test invalid green data (3.14)
         with self.assertRaises(AttributeError):
-            color = Color(121, 3.14, 42)
+            Color(121, 3.14, 42)
 
         # Test invalid blue data (-1)
         with self.assertRaises(AttributeError):
-            color = Color(121, 241, -1)
+            Color(121, 241, -1)
 
         # Test invalid blue data (256)
         with self.assertRaises(AttributeError):
-            color = Color(121, 241, 256)
+            Color(121, 241, 256)
 
         # Test invalid blue data (3.14)
         with self.assertRaises(AttributeError):
-            color = Color(121, 241, 3.14)
+            Color(121, 241, 3.14)
 
     def test_distance_to(self):
 
