@@ -32,6 +32,10 @@ class Color(object):
         :rtype: int
         """
 
+        # Check for color attribute
+        if not isinstance(color, Color):
+            raise AttributeError('Attribute is not a color')
+
         # Calculating the square for each component
         red_sqr = (color.__red - self.__red) ** 2
         green_sqr = (color.__green - self.__green) ** 2

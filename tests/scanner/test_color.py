@@ -64,6 +64,10 @@ class TestColor(unittest.TestCase):
         # Float assertion
         self.assertAlmostEqual(dist, 221.20804687, 6, 'Invalid distance')
 
+        # Test invalid attribute
+        with self.assertRaises(AttributeError):
+            color1.distance_to(3.14)
+
     def test_inverse(self):
 
         # Create a color and invert it
