@@ -30,3 +30,8 @@ deploy:
     tags: true
     repo: ottoszika/smartrcs
     condition: $TOXENV == py27
+
+before_install:
+  - pip install codecov
+after_success:
+  - codecov
