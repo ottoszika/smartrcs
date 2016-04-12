@@ -21,9 +21,6 @@ class TestSmartrcs(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_000_something(self):
-        pass
-
 
 if __name__ == '__main__':
     import sys
