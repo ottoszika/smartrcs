@@ -8,6 +8,9 @@ SmartRCS
 .. image:: https://img.shields.io/travis/ottoszika/smartrcs.svg
         :target: https://travis-ci.org/ottoszika/smartrcs
 
+.. image:: https://img.shields.io/codecov/c/github/ottoszika/smartrcs.svg
+        :target: https://codecov.io/github/ottoszika/smartrcs
+
 .. image:: https://readthedocs.org/projects/smartrcs/badge/?version=latest
         :target: https://readthedocs.org/projects/smartrcs/?badge=latest
         :alt: Documentation Status
