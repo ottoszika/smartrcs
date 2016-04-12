@@ -2,16 +2,26 @@
 import math
 
 
-class Color:
+class Color(object):
     """
     The :class:`Color <Color>` class.
     Defines a color by it's components (R, G, B)
     """
 
     def __init__(self, red=0xff, green=0xff, blue=0xff):
-        self.__red = red
-        self.__green = green
-        self.__blue = blue
+
+        # Check for invalid attributes
+        if not isinstance(red, int) or red < 0x00 or red > 0xff:
+            raise AttributeError('Invalid value for red property: %d' % red)
+        elif not isinstance(green, int) or green < 0x00 or green > 0xff:
+            raise AttributeError('Invalid value for green property: %d' % green)
+        elif not isinstance(blue, int) or blue < 0x00 or blue > 0xff:
+            raise AttributeError('Invalid value for blue property: %d' % blue)
+        else:
+            # Set attributes
+            self.__red = red
+            self.__green = green
+            self.__blue = blue
 
     def distance_to(self, color):
         """
@@ -69,7 +79,8 @@ class Color:
         """
         return '(r: %d, g: %d, b: %d)' % (self.__red, self.__green, self.__blue)
 
-    def get_red(self):
+    @property
+    def red(self):
         """
         Getter for the red component
 
@@ -79,16 +90,21 @@ class Color:
 
         return self.__red
 
-    def set_red(self, value):
+    @red.setter
+    def red(self, value):
         """
         Setter for the red component
 
         :param int value: The value to be set
         """
 
-        self.__red = value
+        if not isinstance(value, int) or value < 0x00 or value > 0xff:
+            raise AttributeError('Invalid value for red property: %d' % value)
+        else:
+            self.__red = value
 
-    def get_green(self):
+    @property
+    def green(self):
         """
         Getter for the green component
 
@@ -98,16 +114,21 @@ class Color:
 
         return self.__green
 
-    def set_green(self, value):
+    @green.setter
+    def green(self, value):
         """
         Setter for the green component
 
         :param int value: The value to be set
         """
 
-        self.__green = value
+        if not isinstance(value, int) or value < 0x00 or value > 0xff:
+            raise AttributeError('Invalid value for green property: %d' % value)
+        else:
+            self.__green = value
 
-    def get_blue(self):
+    @property
+    def blue(self):
         """
         Getter for the blue component
 
@@ -117,10 +138,15 @@ class Color:
 
         return self.__blue
 
-    def set_blue(self, value):
+    @blue.setter
+    def blue(self, value):
         """
         Setter for the blue component
 
         :param int value: The value to be set
         """
-        self.__blue = value
+
+        if not isinstance(value, int) or value < 0x00 or value > 0xff:
+            raise AttributeError('Invalid value for blue property: %d' % value)
+        else:
+            self.__blue = value
