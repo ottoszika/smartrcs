@@ -11,6 +11,10 @@ SmartRCS
 .. image:: https://img.shields.io/codecov/c/github/ottoszika/smartrcs.svg
         :target: https://codecov.io/github/ottoszika/smartrcs
 
+.. image:: https://landscape.io/github/ottoszika/smartrcs/develop/landscape.svg?style=flat
+   :target: https://landscape.io/github/ottoszika/smartrcs/develop
+   :alt: Code Health
+
 .. image:: https://readthedocs.org/projects/smartrcs/badge/?version=latest
         :target: https://readthedocs.org/projects/smartrcs/?badge=latest
         :alt: Documentation Status
