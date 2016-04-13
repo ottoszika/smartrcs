@@ -37,9 +37,9 @@ class Color(object):
             raise AttributeError('Attribute is not a color')
 
         # Calculating the square for each component
-        red_sqr = (color.__red - self.__red) ** 2
-        green_sqr = (color.__green - self.__green) ** 2
-        blue_sqr = (color.__blue - self.__blue) ** 2
+        red_sqr = (color.red - self.red) ** 2
+        green_sqr = (color.green - self.green) ** 2
+        blue_sqr = (color.blue - self.blue) ** 2
 
         # Formula for distance between two 3D points
         return math.sqrt(red_sqr + green_sqr + blue_sqr)
