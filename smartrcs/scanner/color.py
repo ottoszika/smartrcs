@@ -11,17 +11,14 @@ class Color(object):
     def __init__(self, red=0xff, green=0xff, blue=0xff):
 
         # Check for invalid attributes
-        if not isinstance(red, int) or red < 0x00 or red > 0xff:
-            raise AttributeError('Invalid value for red property: %d' % red)
-        elif not isinstance(green, int) or green < 0x00 or green > 0xff:
-            raise AttributeError('Invalid value for green property: %d' % green)
-        elif not isinstance(blue, int) or blue < 0x00 or blue > 0xff:
-            raise AttributeError('Invalid value for blue property: %d' % blue)
-        else:
-            # Set attributes
-            self.__red = red
-            self.__green = green
-            self.__blue = blue
+        self.__check_limits(red)
+        self.__check_limits(green)
+        self.__check_limits(blue)
+
+        # Set attributes
+        self.__red = int(red)
+        self.__green = int(green)
+        self.__blue = int(blue)
 
     def distance_to(self, color):
         """
@@ -31,10 +28,6 @@ class Color(object):
         :return: The distance
         :rtype: int
         """
-
-        # Check for color attribute
-        if not isinstance(color, Color):
-            raise AttributeError('Attribute is not a color')
 
         # Calculating the square for each component
         red_sqr = (color.red - self.red) ** 2
@@ -74,6 +67,17 @@ class Color(object):
         # Create and return the grayscaled color
         return Color(gray, gray, gray)
 
+    @staticmethod
+    def __check_limits(value):
+        """
+        Check if value is between 0 and 255
+
+        :param int value: The value you want to check
+        """
+
+        if value < 0x00 or value > 0xff:
+            raise ValueError('Invalid color component value: %d' % value)
+
     def __str__(self):
         """
         Converts to string
@@ -102,10 +106,8 @@ class Color(object):
         :param int value: The value to be set
         """
 
-        if not isinstance(value, int) or value < 0x00 or value > 0xff:
-            raise AttributeError('Invalid value for red property: %d' % value)
-        else:
-            self.__red = value
+        self.__check_limits(value)
+        self.__red = int(value)
 
     @property
     def green(self):
@@ -126,10 +128,8 @@ class Color(object):
         :param int value: The value to be set
         """
 
-        if not isinstance(value, int) or value < 0x00 or value > 0xff:
-            raise AttributeError('Invalid value for green property: %d' % value)
-        else:
-            self.__green = value
+        self.__check_limits(value)
+        self.__green = int(value)
 
     @property
     def blue(self):
@@ -150,7 +150,5 @@ class Color(object):
         :param int value: The value to be set
         """
 
-        if not isinstance(value, int) or value < 0x00 or value > 0xff:
-            raise AttributeError('Invalid value for blue property: %d' % value)
-        else:
-            self.__blue = value
+        self.__check_limits(value)
+        self.__blue = int(value)

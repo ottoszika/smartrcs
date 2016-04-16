@@ -17,40 +17,28 @@ class TestColor(unittest.TestCase):
     def test___init__(self):
 
         # Test invalid red data (-1)
-        with self.assertRaises(AttributeError):
+        with self.assertRaises(ValueError):
             Color(-1, 241, 42)
 
         # Test invalid red data (256)
-        with self.assertRaises(AttributeError):
+        with self.assertRaises(ValueError):
             Color(256, 241, 42)
 
-        # Test invalid red data (3.14)
-        with self.assertRaises(AttributeError):
-            Color(3.14, 241, 42)
-
         # Test invalid green data (-1)
-        with self.assertRaises(AttributeError):
+        with self.assertRaises(ValueError):
             Color(121, -1, 42)
 
         # Test invalid green data (256)
-        with self.assertRaises(AttributeError):
+        with self.assertRaises(ValueError):
             Color(121, 256, 42)
 
-        # Test invalid green data (3.14)
-        with self.assertRaises(AttributeError):
-            Color(121, 3.14, 42)
-
         # Test invalid blue data (-1)
-        with self.assertRaises(AttributeError):
+        with self.assertRaises(ValueError):
             Color(121, 241, -1)
 
         # Test invalid blue data (256)
-        with self.assertRaises(AttributeError):
+        with self.assertRaises(ValueError):
             Color(121, 241, 256)
-
-        # Test invalid blue data (3.14)
-        with self.assertRaises(AttributeError):
-            Color(121, 241, 3.14)
 
     def test_distance_to(self):
 
@@ -63,10 +51,6 @@ class TestColor(unittest.TestCase):
 
         # Float assertion
         self.assertAlmostEqual(dist, 221.20804687, 6, 'Invalid distance')
-
-        # Test invalid attribute
-        with self.assertRaises(AttributeError):
-            color1.distance_to(3.14)
 
     def test_inverse(self):
 
@@ -123,19 +107,16 @@ class TestColor(unittest.TestCase):
         self.assertEqual(color.blue, 42)
 
         # Test red with invalid values
-        self.assertRaises(AttributeError, setattr, color, 'red', -1)
-        self.assertRaises(AttributeError, setattr, color, 'red', 256)
-        self.assertRaises(AttributeError, setattr, color, 'red', 3.14)
+        self.assertRaises(ValueError, setattr, color, 'red', -1)
+        self.assertRaises(ValueError, setattr, color, 'red', 256)
 
         # Test green with invalid values
-        self.assertRaises(AttributeError, setattr, color, 'green', -1)
-        self.assertRaises(AttributeError, setattr, color, 'green', 256)
-        self.assertRaises(AttributeError, setattr, color, 'green', 3.14)
+        self.assertRaises(ValueError, setattr, color, 'green', -1)
+        self.assertRaises(ValueError, setattr, color, 'green', 256)
 
         # Test blue with invalid values
-        self.assertRaises(AttributeError, setattr, color, 'blue', -1)
-        self.assertRaises(AttributeError, setattr, color, 'blue', 256)
-        self.assertRaises(AttributeError, setattr, color, 'blue', 3.14)
+        self.assertRaises(ValueError, setattr, color, 'blue', -1)
+        self.assertRaises(ValueError, setattr, color, 'blue', 256)
 
 if __name__ == '__main__':
     import sys
