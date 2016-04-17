@@ -22,7 +22,6 @@ class TestDistanceTable(unittest.TestCase):
 
         self.assertEqual(size, 54, 'Invalid distance table size')
 
-
         # Create an invalid dt (with 0 size)
         with self.assertRaises(ValueError):
             DistanceTable(0)

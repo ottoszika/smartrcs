@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """
-test_distancetable
+test_configurable
 ----------------------------------
 
-Tests for `distancetable` module.
+Tests for `configurable` module.
 """
 
 import unittest
