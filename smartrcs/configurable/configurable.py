@@ -24,7 +24,8 @@ class Configurable:
         """
 
         # Store configuration in property
-        self._config = yaml.load(file(self.__config_path, 'r'))
+        stream = open(self.__config_path, 'r')
+        self._config = yaml.load(stream)
 
     def __get_config_path(self):
         """
