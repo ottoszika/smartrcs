@@ -32,7 +32,7 @@ class TestDistanceTable(unittest.TestCase):
 
     def test_add(self):
 
-        # Cteate a distance table and add a distance
+        # Create a distance table and add a distance
         dt = DistanceTable(54)
         dt.add(4, 8, 11.5)
 
@@ -42,7 +42,7 @@ class TestDistanceTable(unittest.TestCase):
 
     def test_get(self):
 
-        # Cteate a distance table and add a distance
+        # Create a distance table and add a distance
         dt = DistanceTable(54)
         dt.add(4, 8, 11.5)
 
@@ -52,7 +52,7 @@ class TestDistanceTable(unittest.TestCase):
 
     def test_nearest(self):
 
-        # Cteate a distance table and add some distances
+        # Create a distance table and add some distances
         dt = DistanceTable(54)
         dt.add(2, 3, 14.21)
         dt.add(2, 7, 11.42)
@@ -62,6 +62,18 @@ class TestDistanceTable(unittest.TestCase):
 
         # Test for nearest location
         self.assertEqual(dt.nearest(2), 7, 'Invalid nearest location')
+
+    def test___str__(self):
+
+        # Create a distance table and add some distances
+        dt = DistanceTable(2)
+        dt.add(0, 0, 0.0)
+        dt.add(0, 1, 14.21)
+        dt.add(1, 0, 14.21)
+        dt.add(1, 1, 0.0)
+
+        # Test if string representation is done correctly
+        self.assertEqual(str(dt), '  0  14 \n 14   0 \n')
 
 if __name__ == '__main__':
     import sys

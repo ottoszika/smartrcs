@@ -34,7 +34,7 @@ class DistanceTable(object):
 
         :param int from_loc: From location
         :param int to_loc: To location
-        :param int distance: Distance value
+        :param float distance: Distance value
         """
 
         self.__check_limits(from_loc, 0, self.__size - 1)
@@ -51,7 +51,7 @@ class DistanceTable(object):
         :param int from_loc: From location
         :param int to_loc: To location
         :return: Distance value
-        :rtype: int
+        :rtype: float
         """
 
         self.__check_limits(from_loc, 0, self.__size - 1)
@@ -98,6 +98,22 @@ class DistanceTable(object):
                 min_value_index = i
 
         return min_value_index
+
+    def __str__(self):
+        """
+        Convert to string
+        :return: The string representation of the distance table
+        :rtype: str
+        """
+
+        str_value = ''
+        for column in self.__table:
+            for value in column:
+                str_value += str(int(value)).rjust(3, ' ') + ' '
+
+            str_value += '\n'
+
+        return str_value
 
     @staticmethod
     def __check_limits(value, lower=None, upper=None):
