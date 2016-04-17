@@ -87,6 +87,20 @@ class Color(object):
         """
         return '(r: %d, g: %d, b: %d)' % (self.__red, self.__green, self.__blue)
 
+    def __eq__(self, other):
+        """
+        Equals to
+
+        :param Color other: The other color
+        :return: True if the two color are equal, otherwise False
+        :rtype: bool
+        """
+
+        return (isinstance(other, self.__class__) and
+                self.__red == other.red and
+                self.__green == other.green and
+                self.__blue == other.blue)
+
     @property
     def red(self):
         """

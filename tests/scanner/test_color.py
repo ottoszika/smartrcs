@@ -82,6 +82,15 @@ class TestColor(unittest.TestCase):
         # Assertion
         self.assertEqual(str(color), '(r: 121, g: 241, b: 42)', 'Invalid __str__ conversion')
 
+    def test___eq__(self):
+
+        # Create two colors
+        color1 = Color(121, 241, 42)
+        color2 = Color(121, 241, 42)
+
+        # Assertion
+        self.assertEqual(color1, color2, 'The two colors should be equal')
+
     def test_getters(self):
         color = Color(121, 241, 42)
 
