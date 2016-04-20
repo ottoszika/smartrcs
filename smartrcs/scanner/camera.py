@@ -2,7 +2,7 @@
 import picamera
 import io
 from PIL import Image
-from smartrcs.configurable import Configurable
+from smartrcs.configurable.configurable import Configurable
 
 
 class Camera(Configurable):
