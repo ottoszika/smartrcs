@@ -59,11 +59,12 @@ class DistanceTable(object):
 
         return self.__table[from_loc, to_loc]
 
-    def nearest(self, loc):
+    def nearest(self, loc, exclude=[]):
         """
         Get the nearest location
 
         :param int loc: The starting location
+        :param list exclude: Do not check these elements
         :return: The nearest location
         :rtype: int
         """
@@ -75,6 +76,10 @@ class DistanceTable(object):
         min_value = None
         min_value_index = 0
         for i in range(0, self.__size):
+
+            # Ignore self comparison
+            if i == loc or i in exclude:
+                continue
 
             # Check for the first number
             if not np.isnan(self.__table[loc, i]):
@@ -88,6 +93,10 @@ class DistanceTable(object):
 
         # Find the min value
         for i in range(min_value_index, self.__size):
+
+            # Ignore self comparison
+            if i == loc or i in exclude:
+                continue
 
             # Store value
             value = self.__table[loc, i]
@@ -109,11 +118,18 @@ class DistanceTable(object):
         str_value = ''
         for column in self.__table:
             for value in column:
-                str_value += str(int(value)).rjust(3, ' ') + ' '
+
+                if not np.isnan(value):
+                    str_value += str(int(value)).rjust(3, ' ') + ' '
+                else:
+                    str_value += 'xxx '
 
             str_value += '\n'
 
         return str_value
+
+    def __len__(self):
+        return self.__size
 
     @staticmethod
     def __check_limits(value, lower=None, upper=None):
