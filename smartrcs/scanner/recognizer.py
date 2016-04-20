@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from smartrcs.configurable.configurable import Configurable
-from PIL import Image
 import numpy as np
 from color import Color
 from distancetable import DistanceTable
@@ -82,15 +81,10 @@ class Recognizer(Configurable):
                 # Calculate histogram
                 cubie_hist = cubie_img.histogram()
 
-                # Separate R, G, B from hist
-                cubie_hist_red = cubie_hist[0: 256]
-                cubie_hist_green = cubie_hist[256: 512]
-                cubie_hist_blue = cubie_hist[512: 768]
-
                 # Getting dominant color
-                red = np.argmax(cubie_hist_red)
-                green = np.argmax(cubie_hist_green)
-                blue = np.argmax(cubie_hist_blue)
+                red = np.argmax(cubie_hist[0: 256])
+                green = np.argmax(cubie_hist[256: 512])
+                blue = np.argmax(cubie_hist[512: 768])
 
                 # Create color and add to hash table
                 color = Color(red, green, blue)
@@ -143,8 +137,12 @@ class Recognizer(Configurable):
         start_val = 0
         sorted_colors.append(start_val)
 
+        # Getting distance table length
+        dist_len = len(self.__distance_table)
+
         # Loop distance_table_size times
-        for i in range(0, len(self.__distance_table)):
+        i = 0
+        while i < dist_len:
 
             # Getting the closest color
             next_val = self.__distance_table.nearest(start_val, sorted_colors)
@@ -158,6 +156,8 @@ class Recognizer(Configurable):
 
             # Change the starting value
             start_val = next_val
+
+            i += 1
 
         # Set property and return it's value
         self.__sorted_colors = sorted_colors

@@ -59,7 +59,7 @@ class DistanceTable(object):
 
         return self.__table[from_loc, to_loc]
 
-    def nearest(self, loc, exclude=[]):
+    def nearest(self, loc, exclude=None):
         """
         Get the nearest location
 
@@ -68,6 +68,10 @@ class DistanceTable(object):
         :return: The nearest location
         :rtype: int
         """
+
+        # If exclude param was not specified => default value = []
+        if exclude is None:
+            exclude = []
 
         # Checking loc param
         self.__check_limits(loc, 0, self.__size - 1)
