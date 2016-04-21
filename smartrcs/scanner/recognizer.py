@@ -17,6 +17,7 @@ class Recognizer(Configurable):
         """
 
         Configurable.__init__(self)
+        Configurable.load(self)
 
         # Storing images hash table
         self.__face_images = {}
@@ -52,22 +53,27 @@ class Recognizer(Configurable):
         # Add image
         self.__face_images[next_name] = image
 
-    def read_images(self):
+    def __read_images(self):
         """
         Read all images
 
         :return: List of dominant colors
+        :rtype: dict
         """
 
         # Here we will store dominant colors
         values = {}
+
+        self.__facelets_values = []
 
         # Getting radius and coords from config
         radius = self._config['radius']
         facelet = self._config['facelet']
 
         # Loop over each face
-        for index, image in self.__face_images.iteritems():
+        for index in self._config['order']:
+
+            image = self.__face_images[index]
 
             # Initialize an empty list at index
             values[index] = []
@@ -90,12 +96,13 @@ class Recognizer(Configurable):
                 color = Color(red, green, blue)
                 values[index].append(color)
 
+            self.__facelets_values.append(values[index])
+
         # Set property and return value
         self.__facelets = values
-        self.__facelets_values = self.__facelets.values()
         return values
 
-    def create_distance_table(self):
+    def __create_distance_table(self):
         """
         Create a distance table for facelets obtained
 
@@ -123,11 +130,12 @@ class Recognizer(Configurable):
         self.__distance_table = distance_table
         return distance_table
 
-    def sort_colors(self):
+    def __sort_colors(self):
         """
         Sort colors by distance
 
         :return: Sorted color indices
+        :rtype: list
         """
 
         # Create an empty list
@@ -163,23 +171,47 @@ class Recognizer(Configurable):
         self.__sorted_colors = sorted_colors
         return sorted_colors
 
-    def group_colors(self):
+    def to_notation(self):
         """
-        Group colors by distance
+        Convert to notation string
 
-        :return: Grouped colors
+        :return: Notation string
+        :rtype: str
         """
 
-        dists = [0]
+        # Notation face order
+        notation_keys = ['U', 'R', 'F', 'D', 'L', 'B']
 
-        # Loop over each color
-        for i in range(0, len(self.__sorted_colors) - 1):
+        # Read, create distance table and sort
+        self.__read_images()
+        self.__create_distance_table()
+        self.__sort_colors()
 
-            # Get two consecutive colors
-            color1_id = self.__sorted_colors[i]
-            color2_id = self.__sorted_colors[i + 1]
+        # Grouping obtained values from sort colors
+        s_limit = len(self.__sorted_colors) / len(self._config['order'])
+        s_range = xrange(0, len(self.__sorted_colors), s_limit)
+        group_values = [self.__sorted_colors[x: x + s_limit] for x in s_range]
 
-            # Calculate distance between them
-            dists.append(self.__distance_table.get(color1_id, color2_id))
+        # Getting each center value
+        center_values = [x + s_limit / 2 for x in xrange(0, len(self.__sorted_colors), s_limit)]
 
-        # TODO: Implement grouping (auto-way)
+        # Create center and group dict to store a key <-> value pair together with faces
+        centers = {}
+        groups = {}
+
+        # Fill centers and groups
+        for i in range(0, len(center_values)):
+            centers[notation_keys[i]] = center_values[i]
+            for j in range(0, len(group_values)):
+                if center_values[i] in group_values[j]:
+                    groups[notation_keys[i]] = group_values[j]
+                    break
+
+        # Build up notation
+        notation = ''
+        for i in range(0, len(self.__sorted_colors)):
+            for index in notation_keys:
+                if i in groups[index]:
+                    notation += index
+
+        return notation
