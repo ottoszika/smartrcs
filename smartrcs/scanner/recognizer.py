@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from smartrcs.configurable.configurable import Configurable
 import numpy as np
+import textwrap
 from color import Color
 from distancetable import DistanceTable
 
@@ -17,7 +18,6 @@ class Recognizer(Configurable):
         """
 
         Configurable.__init__(self)
-        Configurable.load(self)
 
         # Storing images hash table
         self.__face_images = {}
@@ -31,6 +31,9 @@ class Recognizer(Configurable):
 
         # Sorted colors
         self.__sorted_colors = []
+
+        # Notation face order
+        self.__notation_keys = ['U', 'R', 'F', 'D', 'L', 'B']
 
     def add_image(self, image):
         """
@@ -119,7 +122,7 @@ class Recognizer(Configurable):
                 colors_list.append(color)
 
         # Initialize a distance table
-        distance_table = DistanceTable(len(colors_list))
+        distance_table = DistanceTable(len(self._config['order']) * len(self._config['facelet']))
 
         # Fill distance table
         for i in range(0, len(colors_list)):
@@ -179,9 +182,6 @@ class Recognizer(Configurable):
         :rtype: str
         """
 
-        # Notation face order
-        notation_keys = ['U', 'R', 'F', 'D', 'L', 'B']
-
         # Read, create distance table and sort
         self.__read_images()
         self.__create_distance_table()
@@ -201,17 +201,37 @@ class Recognizer(Configurable):
 
         # Fill centers and groups
         for i in range(0, len(center_values)):
-            centers[notation_keys[i]] = center_values[i]
+            centers[self.__notation_keys[i]] = center_values[i]
             for j in range(0, len(group_values)):
                 if center_values[i] in group_values[j]:
-                    groups[notation_keys[i]] = group_values[j]
+                    groups[self.__notation_keys[i]] = group_values[j]
                     break
 
         # Build up notation
         notation = ''
         for i in range(0, len(self.__sorted_colors)):
-            for index in notation_keys:
+            for index in self.__notation_keys:
                 if i in groups[index]:
                     notation += index
+
+        # Translate from order -> Notation keys
+        trans_notation = ''
+        for i in range(0, len(notation)):
+            c = notation[i]
+            c = self._config['order'][self.__notation_keys.index(c)]
+            trans_notation += c
+
+        # Create s_limit sized groups
+        notation_groups = textwrap.wrap(trans_notation, s_limit)
+
+        # Reorder notation
+        notation = ''
+        for index in self.__notation_keys:
+            for i in range(0, len(notation_groups)):
+                notation_chunk = notation_groups[i]
+                if notation_chunk[4] == index:
+                    notation += notation_chunk
+                    del notation_groups[i]
+                    break
 
         return notation
