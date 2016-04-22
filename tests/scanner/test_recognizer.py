@@ -9,7 +9,7 @@ Tests for `recognizer` module.
 """
 
 import unittest
-import cStringIO
+from io import BytesIO
 from PIL import Image
 import base64
 import hashlib
@@ -1919,19 +1919,19 @@ class TestRecognizer(unittest.TestCase):
         recognizer.load(self.__config)
 
         # Add some images
-        recognizer.add_image(Image.open(cStringIO.StringIO(base64.b64decode(self.__face_u))))
-        recognizer.add_image(Image.open(cStringIO.StringIO(base64.b64decode(self.__face_l))))
-        recognizer.add_image(Image.open(cStringIO.StringIO(base64.b64decode(self.__face_f))))
-        recognizer.add_image(Image.open(cStringIO.StringIO(base64.b64decode(self.__face_r))))
-        recognizer.add_image(Image.open(cStringIO.StringIO(base64.b64decode(self.__face_b))))
-        recognizer.add_image(Image.open(cStringIO.StringIO(base64.b64decode(self.__face_d))))
+        recognizer.add_image(Image.open(BytesIO(base64.b64decode(self.__face_u))))
+        recognizer.add_image(Image.open(BytesIO(base64.b64decode(self.__face_l))))
+        recognizer.add_image(Image.open(BytesIO(base64.b64decode(self.__face_f))))
+        recognizer.add_image(Image.open(BytesIO(base64.b64decode(self.__face_r))))
+        recognizer.add_image(Image.open(BytesIO(base64.b64decode(self.__face_b))))
+        recognizer.add_image(Image.open(BytesIO(base64.b64decode(self.__face_d))))
 
         # Check if 6 images were added
         self.assertEqual(len(recognizer._Recognizer__face_images), 6)
 
         # Tne next image should give an exception
         with self.assertRaises(OverflowError):
-            recognizer.add_image(Image.open(cStringIO.StringIO(base64.b64decode(self.__face_d))))
+            recognizer.add_image(Image.open(BytesIO(base64.b64decode(self.__face_d))))
 
     def test___read_images(self):
 
@@ -1940,12 +1940,12 @@ class TestRecognizer(unittest.TestCase):
         recognizer.load(self.__config)
 
         # Add some images
-        recognizer._Recognizer__face_images['U'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_u)))
-        recognizer._Recognizer__face_images['L'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_l)))
-        recognizer._Recognizer__face_images['F'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_f)))
-        recognizer._Recognizer__face_images['R'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_r)))
-        recognizer._Recognizer__face_images['B'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_b)))
-        recognizer._Recognizer__face_images['D'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_d)))
+        recognizer._Recognizer__face_images['U'] = Image.open(BytesIO(base64.b64decode(self.__face_u)))
+        recognizer._Recognizer__face_images['L'] = Image.open(BytesIO(base64.b64decode(self.__face_l)))
+        recognizer._Recognizer__face_images['F'] = Image.open(BytesIO(base64.b64decode(self.__face_f)))
+        recognizer._Recognizer__face_images['R'] = Image.open(BytesIO(base64.b64decode(self.__face_r)))
+        recognizer._Recognizer__face_images['B'] = Image.open(BytesIO(base64.b64decode(self.__face_b)))
+        recognizer._Recognizer__face_images['D'] = Image.open(BytesIO(base64.b64decode(self.__face_d)))
 
         # Result colors
         result_colors = recognizer._Recognizer__read_images()
@@ -1962,12 +1962,12 @@ class TestRecognizer(unittest.TestCase):
         recognizer.load(self.__config)
 
         # Add some images
-        recognizer._Recognizer__face_images['U'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_u)))
-        recognizer._Recognizer__face_images['L'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_l)))
-        recognizer._Recognizer__face_images['F'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_f)))
-        recognizer._Recognizer__face_images['R'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_r)))
-        recognizer._Recognizer__face_images['B'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_b)))
-        recognizer._Recognizer__face_images['D'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_d)))
+        recognizer._Recognizer__face_images['U'] = Image.open(BytesIO(base64.b64decode(self.__face_u)))
+        recognizer._Recognizer__face_images['L'] = Image.open(BytesIO(base64.b64decode(self.__face_l)))
+        recognizer._Recognizer__face_images['F'] = Image.open(BytesIO(base64.b64decode(self.__face_f)))
+        recognizer._Recognizer__face_images['R'] = Image.open(BytesIO(base64.b64decode(self.__face_r)))
+        recognizer._Recognizer__face_images['B'] = Image.open(BytesIO(base64.b64decode(self.__face_b)))
+        recognizer._Recognizer__face_images['D'] = Image.open(BytesIO(base64.b64decode(self.__face_d)))
 
         recognizer._Recognizer__read_images()
 
@@ -1990,12 +1990,12 @@ class TestRecognizer(unittest.TestCase):
         recognizer.load(self.__config)
 
         # Add some images
-        recognizer._Recognizer__face_images['U'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_u)))
-        recognizer._Recognizer__face_images['L'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_l)))
-        recognizer._Recognizer__face_images['F'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_f)))
-        recognizer._Recognizer__face_images['R'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_r)))
-        recognizer._Recognizer__face_images['B'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_b)))
-        recognizer._Recognizer__face_images['D'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_d)))
+        recognizer._Recognizer__face_images['U'] = Image.open(BytesIO(base64.b64decode(self.__face_u)))
+        recognizer._Recognizer__face_images['L'] = Image.open(BytesIO(base64.b64decode(self.__face_l)))
+        recognizer._Recognizer__face_images['F'] = Image.open(BytesIO(base64.b64decode(self.__face_f)))
+        recognizer._Recognizer__face_images['R'] = Image.open(BytesIO(base64.b64decode(self.__face_r)))
+        recognizer._Recognizer__face_images['B'] = Image.open(BytesIO(base64.b64decode(self.__face_b)))
+        recognizer._Recognizer__face_images['D'] = Image.open(BytesIO(base64.b64decode(self.__face_d)))
 
         recognizer._Recognizer__read_images()
         recognizer._Recognizer__create_distance_table()
@@ -2018,12 +2018,12 @@ class TestRecognizer(unittest.TestCase):
         recognizer.load(self.__config)
 
         # Add some images
-        recognizer._Recognizer__face_images['U'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_u)))
-        recognizer._Recognizer__face_images['L'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_l)))
-        recognizer._Recognizer__face_images['F'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_f)))
-        recognizer._Recognizer__face_images['R'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_r)))
-        recognizer._Recognizer__face_images['B'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_b)))
-        recognizer._Recognizer__face_images['D'] = Image.open(cStringIO.StringIO(base64.b64decode(self.__face_d)))
+        recognizer._Recognizer__face_images['U'] = Image.open(BytesIO(base64.b64decode(self.__face_u)))
+        recognizer._Recognizer__face_images['L'] = Image.open(BytesIO(base64.b64decode(self.__face_l)))
+        recognizer._Recognizer__face_images['F'] = Image.open(BytesIO(base64.b64decode(self.__face_f)))
+        recognizer._Recognizer__face_images['R'] = Image.open(BytesIO(base64.b64decode(self.__face_r)))
+        recognizer._Recognizer__face_images['B'] = Image.open(BytesIO(base64.b64decode(self.__face_b)))
+        recognizer._Recognizer__face_images['D'] = Image.open(BytesIO(base64.b64decode(self.__face_d)))
 
         # Test
         self.assertEqual(recognizer.to_notation(), 'BUBUULUFLBBRDRRRUURDULFBURFFBDFDRFURLFFDLDLLLDLDFBRBBD')
