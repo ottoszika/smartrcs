@@ -189,11 +189,11 @@ class Recognizer(Configurable):
 
         # Grouping obtained values from sort colors
         s_limit = len(self.__sorted_colors) / len(self._config['order'])
-        s_range = xrange(0, len(self.__sorted_colors), s_limit)
+        s_range = range(0, len(self.__sorted_colors), s_limit)
         group_values = [self.__sorted_colors[x: x + s_limit] for x in s_range]
 
         # Getting each center value
-        center_values = [x + s_limit / 2 for x in xrange(0, len(self.__sorted_colors), s_limit)]
+        center_values = [x + s_limit / 2 for x in range(0, len(self.__sorted_colors), s_limit)]
 
         # Create center and group dict to store a key <-> value pair together with faces
         centers = {}
