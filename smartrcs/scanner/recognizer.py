@@ -3,7 +3,7 @@ from smartrcs.configurable.configurable import Configurable
 import numpy as np
 import textwrap
 from smartrcs.scanner.color import Color
-from distancetable import DistanceTable
+from smartrcs.scanner.distancetable import DistanceTable
 
 
 class Recognizer(Configurable):
