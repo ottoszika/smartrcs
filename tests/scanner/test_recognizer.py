@@ -1973,7 +1973,7 @@ class TestRecognizer(unittest.TestCase):
 
         # Hashing distance table
         m = hashlib.sha512()
-        m.update(str(recognizer._Recognizer__create_distance_table()))
+        m.update(str(recognizer._Recognizer__create_distance_table()).encode('utf-8'))
         hash = m.hexdigest()
 
         # This should be the valid hash
