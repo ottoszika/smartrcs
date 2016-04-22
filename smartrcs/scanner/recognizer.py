@@ -188,12 +188,12 @@ class Recognizer(Configurable):
         self.__sort_colors()
 
         # Grouping obtained values from sort colors
-        s_limit = len(self.__sorted_colors) / len(self._config['order'])
+        s_limit = int(len(self.__sorted_colors) / len(self._config['order']))
         s_range = range(0, len(self.__sorted_colors), s_limit)
         group_values = [self.__sorted_colors[x: x + s_limit] for x in s_range]
 
         # Getting each center value
-        center_values = [x + s_limit / 2 for x in range(0, len(self.__sorted_colors), s_limit)]
+        center_values = [x + int(s_limit / 2) for x in range(0, len(self.__sorted_colors), s_limit)]
 
         # Create center and group dict to store a key <-> value pair together with faces
         centers = {}
@@ -229,7 +229,7 @@ class Recognizer(Configurable):
         for index in self.__notation_keys:
             for i in range(0, len(notation_groups)):
                 notation_chunk = notation_groups[i]
-                if notation_chunk[4] == index:
+                if notation_chunk[int(s_limit / 2)] == index:
                     notation += notation_chunk
                     del notation_groups[i]
                     break
