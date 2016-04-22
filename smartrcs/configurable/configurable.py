@@ -18,14 +18,19 @@ class Configurable:
         self.__config_path = self.__get_config_path()
         self._config = None
 
-    def load(self):
+    def load(self, config=None):
         """
         Load configuration and initialize the class
+        :param dict config: Configuration value
         """
 
-        # Store configuration in property
-        stream = open(self.__config_path, 'r')
-        self._config = yaml.load(stream)
+        # Set config with the parameter value
+        self._config = config
+
+        if config is None:
+            # Store configuration in property
+            stream = open(self.__config_path, 'r')
+            self._config = yaml.load(stream)
 
     def __get_config_path(self):
         """
