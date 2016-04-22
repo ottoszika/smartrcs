@@ -2,7 +2,7 @@
 from smartrcs.configurable.configurable import Configurable
 import numpy as np
 import textwrap
-from color import Color
+from smartrcs.scanner.color import Color
 from distancetable import DistanceTable
 
 
