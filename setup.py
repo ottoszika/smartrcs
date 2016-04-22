@@ -16,7 +16,8 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     'numpy',
-    'pyyaml'
+    'pyyaml',
+    'pillow'
 ]
 
 test_requirements = [
