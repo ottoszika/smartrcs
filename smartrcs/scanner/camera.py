@@ -22,13 +22,14 @@ class Camera(Configurable):
         # Create camera instance
         self.__camera = picamera.PiCamera()
 
-    def load(self):
+    def load(self, config=None):
         """
         Load configuration from YAML
+        :param dict config: Configuration value
         """
 
         # Load configuration
-        Configurable.load(self)
+        Configurable.load(self, config)
 
         # Set attributes from config
         for key, value in self._config.iteritems():
