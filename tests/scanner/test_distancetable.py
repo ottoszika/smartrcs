@@ -75,6 +75,14 @@ class TestDistanceTable(unittest.TestCase):
         # Test if string representation is done correctly
         self.assertEqual(str(dt), '  0  14 \n 14   0 \n')
 
+        # Create an incomplete distance table
+        dt = DistanceTable(2)
+        dt.add(0, 1, 14.21)
+        dt.add(1, 0, 14.21)
+
+        # Test for representation
+        self.assertEqual(str(dt), 'xxx  14 \n 14 xxx \n')
+
 if __name__ == '__main__':
     import sys
     sys.exit(unittest.main())
