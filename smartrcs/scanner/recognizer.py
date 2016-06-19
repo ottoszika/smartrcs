@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from smartrcs.configurable.configurable import Configurable
+from ..configurable.configurable import Configurable
 import numpy as np
 import textwrap
-from smartrcs.scanner.color import Color
-from smartrcs.scanner.distancetable import DistanceTable
+from color import Color
+from distancetable import DistanceTable
 
 
 class Recognizer(Configurable):
