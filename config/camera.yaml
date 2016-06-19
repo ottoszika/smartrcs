@@ -1,0 +1,23 @@
+resolution:
+    - 2592
+    - 1944
+sharpness: 0
+contrast: 0
+brightness: 50
+saturation: 0
+ISO: 0
+video_stabilization: false
+exposure_compensation: 0
+exposure_mode: "auto"
+meter_mode: "average"
+awb_mode: "auto"
+image_effect: "none"
+color_effects: null
+rotation: 0
+hflip: false
+vflip: false
+crop:
+    - 0.0
+    - 0.0
+    - 1.0
+    - 1.0
