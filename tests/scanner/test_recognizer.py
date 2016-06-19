@@ -2027,3 +2027,7 @@ class TestRecognizer(unittest.TestCase):
 
         # Test
         self.assertEqual(recognizer.to_notation(), 'BUBUULUFLBBRDRRRUURDULFBURFFBDFDRFURLFFDLDLLLDLDFBRBBD')
+
+if __name__ == '__main__':
+    import sys
+    sys.exit(unittest.main())
