@@ -2,8 +2,8 @@
 from ..configurable.configurable import Configurable
 import numpy as np
 import textwrap
-from color import Color
-from distancetable import DistanceTable
+from .color import Color
+from .distancetable import DistanceTable
 
 
 class Recognizer(Configurable):
