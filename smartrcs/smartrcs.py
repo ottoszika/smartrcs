@@ -53,9 +53,9 @@ class SmartRCS(object):
 
 
 # Main function
-def __main__():
+def main():
     s = SmartRCS(server=1)
     s.run()
 
 if __name__ == '__main__':
-    smartrcs.__main__()
+    smartrcs.main()
