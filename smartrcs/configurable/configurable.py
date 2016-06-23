@@ -63,3 +63,6 @@ class Configurable:
 
         # Write to file
         self.__write_to_config(yaml.dump(self._config, default_flow_style=True))
+
+    def get_config(self):
+        return self._config

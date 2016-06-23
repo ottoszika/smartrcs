@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from ..configurable.configurable import Configurable
+from smartrcs.configurable.configurable import Configurable
 import numpy as np
 import textwrap
 from .color import Color
