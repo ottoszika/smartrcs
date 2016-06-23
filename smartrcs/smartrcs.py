@@ -58,4 +58,4 @@ def main():
     s.run()
 
 if __name__ == '__main__':
-    smartrcs.main()
+    main()
