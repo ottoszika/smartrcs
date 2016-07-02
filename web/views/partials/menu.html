@@ -1,0 +1,9 @@
+<div ng-controller="MenuController" class="ui labeled icon menu">
+
+    <a ng-repeat="item in items" class="{{ item.active ? 'active' : '' }} item" ng-click="redirect(item.url)">
+        <i class="{{ item.icon }} icon"></i>
+        {{ item.name }}
+    </a>
+
+</div>
+<br />

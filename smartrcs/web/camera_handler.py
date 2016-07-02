@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from smartrcs.configurable.configurable import Configurable
 from handler import Handler
+import json
 
 
 class CameraHandler(Handler):
@@ -36,3 +37,23 @@ class CameraHandler(Handler):
 
         config = self.__camera.get_config()
         self.write(config)
+
+    def post(self):
+        """
+        Handle POST request
+        Write camera configuration to config file
+        """
+
+        try:
+
+            # Read body json and save it
+            config = json.loads(self.request.body)
+            self.__camera.set_config(config)
+            self.__camera.save()
+
+            # Success code
+            self.write({'error': 0})
+        except ValueError:
+
+            # Error code
+            self.write({'error': 1})

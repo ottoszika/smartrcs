@@ -65,4 +65,15 @@ class Configurable:
         self.__write_to_config(yaml.dump(self._config, default_flow_style=True))
 
     def get_config(self):
+        """
+        Getter for configuration
+        """
+
         return self._config
+
+    def set_config(self, config):
+        """
+        Setter for configuration
+        """
+
+        self._config = config

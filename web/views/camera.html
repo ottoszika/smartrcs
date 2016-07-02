@@ -1,0 +1,73 @@
+<div class="ui form">
+    
+    <ng-include src="'views/partials/dimmer.html'"></ng-include>
+
+    <!-- Start of first row fields - Image settings -->
+    <div class="four fields">
+        <div class="field">
+            <label>Saturation</label>
+            <input type="text" ng-model="config.saturation">
+        </div>
+
+        <div class="field">
+            <label>Sharpness</label>
+            <input type="text" ng-model="config.sharpness">
+        </div>
+
+        <div class="field">
+            <label>Brightness</label>
+            <input type="text" ng-model="config.brightness">
+        </div>
+
+        <div class="field">
+            <label>Contrast</label>
+            <input type="text" ng-model="config.contrast">
+        </div>
+    </div>
+    <!-- End of first row fields - Image settings -->
+
+    <!-- Start of second row fields - Resolution -->
+    <div class="two fields">
+        <div class="field">
+            <label>Resolution (Width)</label>
+            <input type="text" ng-model="config.resolution[0]">
+        </div>
+
+        <div class="field">
+            <label>Resolution (Height)</label>
+            <input type="text" ng-model="config.resolution[1]">
+        </div>
+    </div>
+    <!-- End of first row fields - Resolution -->
+
+    <!-- Start of third row fields - Cropping -->
+    <div class="four fields">
+        <div class="field">
+            <label>Crop (Upper-left X)</label>
+            <input type="text" ng-model="config.crop[0]">
+        </div>
+
+        <div class="field">
+            <label>Crop (Upper-left Y)</label>
+            <input type="text" ng-model="config.crop[1]">
+        </div>
+
+        <div class="field">
+            <label>Crop (Lower-right X)</label>
+            <input type="text" ng-model="config.crop[2]">
+        </div>
+
+        <div class="field">
+            <label>Crop (Lower-right Y)</label>
+            <input type="text" ng-model="config.crop[3]">
+        </div>
+    </div>
+    <!-- End of third row fields - Cropping -->
+
+    <div class="ui right aligned column">
+        <button class="ui green button" ng-click="save()">
+            <i class="save icon"></i>
+            Save
+        </button>
+    </div>
+</div>

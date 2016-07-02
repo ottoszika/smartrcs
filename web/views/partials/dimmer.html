@@ -1,0 +1,33 @@
+<!-- Start of loading dimmer -->
+<div class="ui {{ loader.active ? 'active' : '' }} inverted dimmer">
+    <div class="ui text loader">{{ loader.message }}</div>
+</div>
+<!-- End of loading dimmer -->
+
+<!-- Start of saving dimmer -->
+<div class="ui {{ saver.active ? 'active' : '' }} inverted dimmer">
+
+    <!-- Start of success message -->
+    <div class="content" ng-if="saver.success">
+        <div class="center">
+            <div class="ui icon header">
+                <i class="green checkmark icon"></i>
+                Saved successfully!
+            </div>
+        </div>
+    </div>
+    <!-- End of success message -->
+
+    <!-- Start of error message -->
+    <div class="content" ng-if="!saver.success">
+        <div class="center">
+            <div class="ui icon header">
+                <i class="red remove icon"></i>
+                Error!
+            </div>
+        </div>
+    </div>
+    <!-- End of error message -->
+
+</div>
+<!-- End of saving dimmer -->

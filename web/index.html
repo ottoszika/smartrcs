@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartRCS - Administration panel</title>
+
+    <!-- Start of stylesheets -->
+    <link rel="stylesheet" type="text/css" href="bower_components/semantic/dist/semantic.min.css">
+    <!-- End of stylesheets -->
+</head>
+<body ng-app="smartrcs" class="ui container">
+
+    <!-- Start of sidebar menu -->
+    <ng-include src="'views/partials/menu.html'"></ng-include>
+    <!-- End of sidebar menu -->
+
+    <!-- Start of content view -->
+    <ng-view></ng-view>
+    <!-- End of content view -->
+
+    <!-- Start of AngularJS scripts -->
+    <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
+    <!-- End of AngularJS scripts -->
+
+    <!-- Start of service scripts -->
+    <script type="text/javascript" src="services/camera.js"></script>
+    <!-- End of services scripts -->
+
+    <!-- Start of controller scripts -->
+    <script type="text/javascript" src="controllers/menu.js"></script>
+    <script type="text/javascript" src="controllers/camera.js"></script>
+    <!-- End of controller scripts -->
+
+    <!-- Start of main scripts -->
+    <script type="text/javascript" src="js/app.js"></script>
+    <!-- End of main scripts -->
+</body>
+</html>
