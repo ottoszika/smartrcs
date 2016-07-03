@@ -1,0 +1,10 @@
+<!-- Start of 3x3 facelet -->
+<div class="facelet">
+    <div class="cubie-row" ng-repeat="row in [0, 1, 2]">
+        <div class="cubie" ng-repeat="col in [0, 1, 2]"
+             style="background: {{ colors[3 * row + col] }};"
+             ng-bind-html="values[3 * row + col]">
+        </div>
+    </div>
+</div>
+<!-- End of 3x3 facelet -->

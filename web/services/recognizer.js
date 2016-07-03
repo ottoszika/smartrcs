@@ -1,7 +1,7 @@
-var CameraService = function ($http) {
+var RecognizerService = function ($http) {
 
     // Common url
-    var url = '/api/camera';
+    var url = '/api/recognizer';
 
     // Will returned to export all properties
     var service = { };
@@ -12,7 +12,21 @@ var CameraService = function ($http) {
         // Make a GET request to API
         $http({
             method: 'GET',
-            url: url
+            url: url + '?type=json'
+        }).then(function (response) {
+
+            // Callback
+            cb(response.data);
+        });
+    };
+
+    // Get snapshot from server
+    service.getSnapshot = function (cb) {
+
+        // Make a GET request to API
+        $http({
+            method: 'GET',
+            url: url + '?type=img'
         }).then(function (response) {
 
             // Callback

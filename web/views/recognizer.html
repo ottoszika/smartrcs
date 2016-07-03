@@ -1,0 +1,97 @@
+<div class="ui two columns grid">
+
+    <!-- Start of camera preview -->
+    <div class="ui column">
+        <img class="ui fluid image rec-img" src="/api/recognizer?type=img" ng-click="selectImage($event)">
+    </div>
+    <!-- End of camera preview -->
+
+    <!-- Start of configuration -->
+    <div class="ui column">
+
+        <ng-include src="'views/partials/dimmer.html'"></ng-include>
+
+        <!-- Start of tabs -->
+        <div class="ui top attached tabular menu" id="recognizer-tab">
+            <a class="active item" data-tab="auto">Auto</a>
+            <a class="item" data-tab="manual">Manual</a>
+        </div>
+        <!-- End of tabs -->
+
+        <!-- Start of auto tab content -->
+        <div class="ui bottom attached active tab segment" data-tab="auto">
+            <facelet colors="selectCubie" values="textCubie"></facelet>
+
+            <br />
+
+            <div class="ui green bottom attached label" ng-if="currentAutoButton == 9">
+                Completed! Click "Save" to persist this configuration.
+            </div>
+        </div>
+        <!-- End of auto tab content -->
+
+        <!-- Start of manual tab content -->
+        <div class="ui bottom attached tab segment" data-tab="manual">
+
+            <!-- Start of coordinates table -->
+            <table class="ui table">
+                <tr ng-repeat="cubie in config.facelet track by $index">
+                    <td>{{ $index + 1 }}</td>
+                    <td>
+                        <div class="ui mini labeled fluid input">
+                            <div class="ui label">X</div>
+                            <input type="text" ng-model="cubie[0]">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ui mini labeled fluid input">
+                            <div class="ui label">Y</div>
+                            <input type="text" ng-model="cubie[1]">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <!-- End of coordinates table -->
+
+        </div>
+        <!-- End of manual tab content -->
+
+        <div class="ui form">
+
+            <!-- Start of order field -->
+            <div class="ui field">
+                <label>Scan order</label>
+                <div ng-sortable="sortableConfig">
+                    <div ng-repeat="item in config.order" class="order-item">{{item}}</div>
+                </div>
+            </div>
+            <!-- End of order field -->
+
+            <!-- Start of radius field -->
+            <div class="ui field">
+                <label>Radius</label>
+                <input type="text" ng-model="config.radius">
+            </div>
+            <!-- End of radius field -->
+
+        </div>
+
+        <br />
+
+        <!-- Start of reset button -->
+        <button class="ui button" ng-click="reset()">
+            <i class="refresh icon"></i>
+            Reset
+        </button>
+        <!-- End of reset button -->
+
+        <!-- Start of save button -->
+        <button class="ui green button" ng-click="save()">
+            <i class="save icon"></i>
+            Save
+        </button>
+        <!-- End of save button -->
+
+    </div>
+
+</div>

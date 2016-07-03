@@ -16,12 +16,12 @@ var MenuController = function ($scope, $location, $rootScope) {
         angular.forEach($scope.items, function (item, key) {
             $scope.items[key].active = item.url == url;
         });
-    }
+    };
 
     // Redirect function
     $scope.redirect = function (url) {
         $location.path(url);
-    }
+    };
 
     // Refresh on route change
     $rootScope.$on('$locationChangeStart', function () {
@@ -30,4 +30,4 @@ var MenuController = function ($scope, $location, $rootScope) {
 
     // Refresh on load
     $scope.refresh();
-}
+};

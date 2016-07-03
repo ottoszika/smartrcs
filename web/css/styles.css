@@ -1,0 +1,45 @@
+.facelet {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 3px;
+}
+
+.cubie-row {
+    display: table-row;
+    height: 64px;
+}
+
+.cubie {
+    display: table-cell;
+    width: 64px;
+    height: 64px;
+    border: 1px solid #000;
+    vertical-align: middle;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.order-item {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    border: 1px solid #000;
+    text-align: center;
+    line-height: 64px;
+    font-size: 40px;
+    border-radius: 5px;
+    margin-right: 3px;
+    cursor: pointer;
+}
+
+.order-item-chosen {
+    background: #ccc;
+}
+
+.order-item-ghost {
+    border: 1px dotted #000;
+}
+
+.rec-img {
+    cursor: crosshair;
+}

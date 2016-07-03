@@ -15,7 +15,7 @@ var CameraController = function ($scope, CameraService) {
             $scope.saver = { active: false, success: null };
             $scope.$apply();
         }, 800);
-    }
+    };
 
     // Post configuration data from model
     $scope.save = function () {
@@ -28,7 +28,7 @@ var CameraController = function ($scope, CameraService) {
 
             $scope.loader = { active: false, message: null };
         });
-    }
+    };
 
     // Get configuration data and store in model
     $scope.loader = { active: true, message: 'Loading...' };
@@ -36,4 +36,4 @@ var CameraController = function ($scope, CameraService) {
         $scope.config = data;
         $scope.loader = { active: false, message: null };
     });
-}
+};

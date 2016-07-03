@@ -6,6 +6,7 @@
 
     <!-- Start of stylesheets -->
     <link rel="stylesheet" type="text/css" href="bower_components/semantic/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
     <!-- End of stylesheets -->
 </head>
 <body ng-app="smartrcs" class="ui container">
@@ -18,18 +19,30 @@
     <ng-view></ng-view>
     <!-- End of content view -->
 
-    <!-- Start of AngularJS scripts -->
+    <!-- Start of frameworks scripts -->
     <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
-    <!-- End of AngularJS scripts -->
+    <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="bower_components/semantic/dist/semantic.min.js"></script>
+    <script type="text/javascript" src="bower_components/Sortable/Sortable.min.js"></script>
+    <script type="text/javascript" src="bower_components/Sortable/ng-sortable.js"></script>
+    <!-- End of frameworks scripts -->
 
     <!-- Start of service scripts -->
     <script type="text/javascript" src="services/camera.js"></script>
+    <script type="text/javascript" src="services/recognizer.js"></script>
     <!-- End of services scripts -->
+
+    <!-- Start of directives -->
+    <script type="text/javascript" src="directives/facelet.js"></script>
+    <!-- End of directives -->
 
     <!-- Start of controller scripts -->
     <script type="text/javascript" src="controllers/menu.js"></script>
+    <script type="text/javascript" src="controllers/home.js"></script>
     <script type="text/javascript" src="controllers/camera.js"></script>
+    <script type="text/javascript" src="controllers/recognizer.js"></script>
     <!-- End of controller scripts -->
 
     <!-- Start of main scripts -->

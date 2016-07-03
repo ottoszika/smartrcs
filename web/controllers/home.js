@@ -1,0 +1,2 @@
+var HomeController = function () {
+};
