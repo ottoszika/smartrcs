@@ -9,7 +9,7 @@ from twisted.python import log
 
 # Handlers
 from camera_handler import CameraHandler
-
+from recognizer_handler import RecognizerHandler
 
 class Server:
     """
@@ -37,9 +37,11 @@ class Server:
 
             # API
             (self.__api_path + '/camera', CameraHandler),
+            (self.__api_path + '/recognizer', RecognizerHandler),
 
             # Static files
-            ('/(.*)', cyclone.web.StaticFileHandler, {'path': home + '/.smartrcs/web/static'}),
+            ('/(.*)', cyclone.web.StaticFileHandler,
+                {'path': home + '/.smartrcs/web/static', 'default_filename': 'index.html'}),
         ])
 
         # Log to console
