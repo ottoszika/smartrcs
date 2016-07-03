@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from smartrcs.configurable.configurable import Configurable
-from handler import Handler
+import cyclone
 import json
 
 
-class CameraHandler(Handler):
+class CameraHandler(cyclone.web.RequestHandler):
     """
     The :class:`CameraHandler <CameraHandler>` class.
     Handle camera configuration GET and POST requests
@@ -26,7 +26,7 @@ class CameraHandler(Handler):
             Configurable.load(self)
 
     def __init__(self, application, request, **kwargs):
-        Handler.__init__(self, application, request, **kwargs)
+        cyclone.web.RequestHandler.__init__(self, application, request, **kwargs)
         self.__camera = self.Camera()
 
     def get(self):
