@@ -10,6 +10,8 @@ from twisted.python import log
 # Handlers
 from camera_handler import CameraHandler
 from recognizer_handler import RecognizerHandler
+from bower import Bower
+
 
 class Server:
     """
@@ -47,15 +49,24 @@ class Server:
         # Log to console
         log.startLogging(sys.stdout)
 
+        # Creating a bower object for further installation (if it's necessary)
+        self.__bower = Bower()
+
     def start(self):
         """
         Start web server
         """
 
+        # Install bower dependencies (only if it were not install)
+        if not self.__bower.check_installed():
+            print 'Bower dependencies will be installed...'
+            self.__bower.install_dependencies()
+
         reactor.listenTCP(self.__port, self.__application, interface=self.__host)
         reactor.run()
 
-    def stop(self):
+    @staticmethod
+    def stop():
         """
         Stop web server
         """

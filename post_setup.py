@@ -24,6 +24,15 @@ class PostInstallCommand(install):
         Create home directory with config and web files
         """
 
+        # Getting user id and group id
+        uid = int(os.getuid())
+        gid = int(os.getgid())
+
+        # sudo?
+        if uid == 0:
+            uid = int(os.environ.get('SUDO_UID'))
+            gid = int(os.environ.get('SUDO_GID'))
+
         # Home directory
         directory = os.path.expanduser('~') + '/.smartrcs'
 
@@ -35,3 +44,6 @@ class PostInstallCommand(install):
         # Copy stuffs
         shutil.copytree('./config', directory + '/config')
         shutil.copytree('./web', directory + '/web')
+
+        # Set permissions
+        os.system('chown -R %d:%d %s' % (uid, gid, directory))
