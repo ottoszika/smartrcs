@@ -52,6 +52,14 @@ class Server:
         # Creating a bower object for further installation (if it's necessary)
         self.__bower = Bower()
 
+    def get_application(self):
+        """
+        Get application instance
+        :return: Cyclone application instance
+        :rtype: Application
+        """
+        return self.__application
+
     def start(self):
         """
         Start web server
