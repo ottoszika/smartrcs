@@ -59,7 +59,7 @@ class Server:
 
         # Install bower dependencies (only if it were not install)
         if not self.__bower.check_installed():
-            print 'Bower dependencies will be installed...'
+            print('Bower dependencies will be installed...')
             self.__bower.install_dependencies()
 
         reactor.listenTCP(self.__port, self.__application, interface=self.__host)

@@ -38,7 +38,7 @@ class Bower(Configurable):
 
         try:
             bower_version = subprocess.check_output(['bower', '--version'])
-            print 'Using bower version: %s' % bower_version
+            print('Using bower version: %s' % bower_version)
 
             os.system('cd %s && bower install' % self.__web_path)
 
