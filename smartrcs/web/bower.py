@@ -1,10 +1,10 @@
 import subprocess
 import logging
 import os
-import yaml
+from smartrcs.configurable.configurable import Configurable
 
 
-class Bower:
+class Bower(Configurable):
     """
     The :class:`Bower <Bower>` class.
     Bower dependency checker and installer
@@ -12,15 +12,14 @@ class Bower:
 
     def __init__(self):
         """
-        Initializer (paths)
+        Initialize bower configuration and paths
         """
 
-        # Getting home path
-        home = os.path.expanduser('~')
+        # Initialize and load superclass
+        Configurable.__init__(self)
+        Configurable.load(self)
 
-        # Config and web path
-        self.__config_file = home + '/.smartrcs/config/bower.yaml'
-        self.__web_path = home + '/.smartrcs/web'
+        self.__web_path = os.path.expanduser("~") + '/.smartrcs/web'
 
     def check_installed(self):
         """
@@ -30,9 +29,7 @@ class Bower:
         :rtype: bool
         """
 
-        stream = open(self.__config_file, 'r')
-        bower_config = yaml.load(stream)
-        return bower_config['installed']
+        return self._config['installed']
 
     def install_dependencies(self):
         """
@@ -54,6 +51,5 @@ class Bower:
         Set installed to True in config file
         """
 
-        with open(self.__config_file, 'w') as outfile:
-            data = yaml.dump({'installed': True}, default_flow_style=True)
-            outfile.write(data)
+        self._config['installed'] = True
+        self.save()

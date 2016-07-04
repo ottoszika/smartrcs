@@ -42,7 +42,7 @@ class Configurable:
 
         # Getting home path and config file from class name
         home = expanduser("~")
-        config_file = self.__class__.__name__.lower() + '.yaml'
+        config_file = self.__class__.__name__.lower() + '.yml'
 
         # Build up config file fill path
         return home + '/.smartrcs/config/' + config_file
