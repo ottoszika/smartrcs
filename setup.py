@@ -6,7 +6,7 @@ try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
-
+import post_setup
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
@@ -57,7 +57,10 @@ setup(
         'Programming Language :: Python :: 3.5',
     ],
     entry_points={
-        'console_scripts': ['smartrcs=smartrcs.smartrcs:main'],
+        'console_scripts': ['smartrcs=smartrcs.smartrcs:main']
+    },
+    cmdclass={
+        'install': post_setup.PostInstallCommand
     },
     test_suite='tests',
     tests_require=test_requirements

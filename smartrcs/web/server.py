@@ -41,7 +41,7 @@ class Server:
 
             # Static files
             ('/(.*)', cyclone.web.StaticFileHandler,
-                {'path': home + '/.smartrcs/web/static', 'default_filename': 'index.html'}),
+                {'path': home + '/.smartrcs/web', 'default_filename': 'index.html'}),
         ])
 
         # Log to console
