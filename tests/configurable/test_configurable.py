@@ -35,7 +35,7 @@ class TestConfigurable(unittest.TestCase):
 
         # Get path and correct path
         path = conf._Configurable__get_config_path()
-        correct_path = expanduser("~") + '/.smartrcs/config/configurable.yaml'
+        correct_path = expanduser("~") + '/.smartrcs/config/configurable.yml'
 
         # Test
         self.assertEqual(path, correct_path, 'Invalid config path')
