@@ -18,7 +18,8 @@ requirements = [
     'numpy',
     'pyyaml',
     'pillow',
-    'cyclone'
+    'cyclone',
+    'kociemba'
 ]
 
 test_requirements = [
