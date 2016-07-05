@@ -12,10 +12,13 @@ import unittest
 from smartrcs.configurable.configurable import Configurable
 from smartrcs.web.bower import Bower
 import os
+import subprocess
 
 
 CONFIG_VALUE = None
 SAMPLE_BOWER_CONFIG = {'installed': False}
+CHECK_OUTPUT_RESULT = None
+SYSTEM_RESULT = None
 
 
 class TestBower(unittest.TestCase):
@@ -30,11 +33,23 @@ class TestBower(unittest.TestCase):
         global CONFIG_VALUE
         CONFIG_VALUE = obj._config
 
+    @staticmethod
+    def check_output(data):
+        global CHECK_OUTPUT_RESULT
+        CHECK_OUTPUT_RESULT = data
+
+    @staticmethod
+    def system(data):
+        global SYSTEM_RESULT
+        SYSTEM_RESULT = data
+
     def setUp(self):
 
         # Mocking methods
         Configurable.load = self.load
         Configurable.save = self.save
+        os.system = self.system
+        subprocess.check_output = self.check_output
 
     def test___init__(self):
         global SAMPLE_BOWER_CONFIG
@@ -58,6 +73,18 @@ class TestBower(unittest.TestCase):
         SAMPLE_BOWER_CONFIG['installed'] = True
         bower = Bower()
         self.assertTrue(bower.check_installed())
+
+    def test_install_dependencies(self):
+
+        global CHECK_OUTPUT_RESULT
+        global SYSTEM_RESULT
+
+        bower = Bower()
+        bower.install_dependencies()
+
+        # Test two shell command results
+        self.assertEqual(CHECK_OUTPUT_RESULT, ['bower', '--version'])
+        self.assertEqual(SYSTEM_RESULT, 'cd %s && bower install' % (os.path.expanduser("~") + '/.smartrcs/web'))
 
     def test_mark_installed(self):
 
