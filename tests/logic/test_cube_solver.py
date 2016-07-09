@@ -24,7 +24,7 @@ class TestCubeSolver(unittest.TestCase):
         # Mockup kociemba solving function
         kociemba.solve = self.solve
 
-    def test__init__(self):
+    def test___init__(self):
         cube_solver = CubeSolver('DRLUUBFBRBLURRLRUBLRDDFDLFUFUFFDBRDUBRUFLLFDDBFLUBLRBD')
 
         # Check for correct property value
