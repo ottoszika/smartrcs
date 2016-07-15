@@ -1,4 +1,4 @@
-var app = angular.module('smartrcs', ['ngRoute', 'ngSanitize', 'ng-sortable']);
+var app = angular.module('smartrcs', ['ngRoute', 'ngSanitize', 'ng-sortable', 'ui.knob']);
 
 // Routes
 app.config(function ($routeProvider) {
