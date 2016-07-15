@@ -35,6 +35,28 @@ class Recognizer(Configurable):
         # Notation face order
         self.__notation_keys = ['U', 'R', 'F', 'D', 'L', 'B']
 
+    def load(self, config=None):
+        """
+        Load configuration from YAML
+        :param dict config: Configuration value
+        """
+
+        Configurable.load(self, config)
+        self.__cast_config()
+
+    def __cast_config(self):
+        """
+        Cast configuration to match types
+        """
+
+        # Converting radius to integer
+        self._config['radius'] = int(self._config['radius'])
+
+        # Convert facelet cubie coordinates to integer
+        for i in range(0, len(self._config['facelet'])):
+            self._config['facelet'][i][0] = int(self._config['facelet'][i][0])
+            self._config['facelet'][i][1] = int(self._config['facelet'][i][1])
+
     def add_image(self, image):
         """
         Add image to recognizer

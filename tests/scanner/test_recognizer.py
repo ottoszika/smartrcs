@@ -1912,11 +1912,40 @@ class TestRecognizer(unittest.TestCase):
         self.assertListEqual(recognizer._Recognizer__notation_keys,
                              ['U', 'R', 'F', 'D', 'L', 'B'])
 
+    def test_load(self):
+
+        # Create recognizer
+        recognizer = Recognizer()
+
+        # Load configuration
+        recognizer.load(self.__config)
+
+        self.assertEqual(recognizer._config, self.__config)
+
+    def test___cast_config(self):
+
+        # Create recognizer
+        recognizer = Recognizer()
+
+        # Clone config
+        config_no_types = self.__config.copy()
+
+        # Convert to string some things
+        config_no_types['radius'] = str(config_no_types['radius'])
+        for i in range(0, len(config_no_types['facelet'])):
+            config_no_types['facelet'][i][0] = str(config_no_types['facelet'][i][0])
+            config_no_types['facelet'][i][1] = str(config_no_types['facelet'][i][1])
+
+        recognizer._config = config_no_types
+        recognizer._Recognizer__cast_config()
+
+        self.assertEqual(config_no_types, self.__config)
+
     def test_add_image(self):
 
         # Create recognizer from the specified config
         recognizer = Recognizer()
-        recognizer.load(self.__config)
+        recognizer._config = self.__config
 
         # Add some images
         recognizer.add_image(Image.open(BytesIO(base64.b64decode(self.__face_u))))
@@ -1959,7 +1988,7 @@ class TestRecognizer(unittest.TestCase):
 
         # Create recognizer from the specified config
         recognizer = Recognizer()
-        recognizer.load(self.__config)
+        recognizer._config = self.__config
 
         # Add some images
         recognizer._Recognizer__face_images['U'] = Image.open(BytesIO(base64.b64decode(self.__face_u)))
@@ -1987,7 +2016,7 @@ class TestRecognizer(unittest.TestCase):
 
         # Create recognizer from the specified config
         recognizer = Recognizer()
-        recognizer.load(self.__config)
+        recognizer._config = self.__config
 
         # Add some images
         recognizer._Recognizer__face_images['U'] = Image.open(BytesIO(base64.b64decode(self.__face_u)))
@@ -2015,7 +2044,7 @@ class TestRecognizer(unittest.TestCase):
 
         # Create recognizer from the specified config
         recognizer = Recognizer()
-        recognizer.load(self.__config)
+        recognizer._config = self.__config
 
         # Add some images
         recognizer._Recognizer__face_images['U'] = Image.open(BytesIO(base64.b64decode(self.__face_u)))
