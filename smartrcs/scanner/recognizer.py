@@ -57,6 +57,10 @@ class Recognizer(Configurable):
             self._config['facelet'][i][0] = int(self._config['facelet'][i][0])
             self._config['facelet'][i][1] = int(self._config['facelet'][i][1])
 
+        # Convert rotation to integer
+        for i in range(0, len(self._config['rotation'])):
+            self._config['rotation'][i] = int(self._config['rotation'][i])
+
     def set_images(self, images):
         """
         Add images to recognizer
@@ -88,6 +92,10 @@ class Recognizer(Configurable):
 
         # Getting facelet index name
         next_name = order[img_count]
+
+        # Rotating image
+        rotation = self._config['rotation'][img_count]
+        image = image.rotate(rotation)
 
         # Add image
         self.__face_images[next_name] = image

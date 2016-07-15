@@ -22,10 +22,10 @@
 .order-item {
     display: inline-block;
     width: 64px;
-    height: 64px;
+    height: 96px;
     border: 1px solid #000;
     text-align: center;
-    line-height: 64px;
+    line-height: 40px;
     font-size: 40px;
     border-radius: 5px;
     margin-right: 3px;

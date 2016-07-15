@@ -58,14 +58,17 @@
 
         <div class="ui form">
 
-            <!-- Start of order field -->
+            <!-- Start of order and rotation field -->
             <div class="ui field">
                 <label>Scan order</label>
                 <div ng-sortable="sortableConfig">
-                    <div ng-repeat="item in config.order" class="order-item">{{item}}</div>
+                    <div ng-repeat="item in config.order track by $index" class="order-item">
+                        {{item}}
+                        <knob knob-data="config.rotation[$index]" knob-options="knobOptions"></knob>
+                    </div>
                 </div>
             </div>
-            <!-- End of order field -->
+            <!-- End of order and rotation field -->
 
             <!-- Start of radius field -->
             <div class="ui field">

@@ -24,7 +24,8 @@ class TestRecognizer(unittest.TestCase):
         self.__config = {'radius': 3,
                          'order': ['U', 'L', 'F', 'R', 'B', 'D'],
                          'facelet': [[15, 15], [45, 15], [75, 15], [15, 45], [45, 45],
-                                     [75, 45], [15, 75], [45, 75], [75, 75]]}
+                                     [75, 45], [15, 75], [45, 75], [75, 75]],
+                         'rotation': [0, 0, 90, 0, 0, 90]}
 
         # Back face
         self.__face_b = ('iVBORw0KGgoAAAANSUhEUgAAAFcAAABXCAIAAAD+qk47AAAACXBIWXMAAAsTAAALEwEAmpwYAAAKT2lD'
@@ -1978,6 +1979,20 @@ class TestRecognizer(unittest.TestCase):
 
         # Check if 6 images were added
         self.assertEqual(len(recognizer._Recognizer__face_images), 6)
+
+        # Check for correct rotations
+        self.assertEqual(recognizer._Recognizer__face_images['U'],
+                         Image.open(BytesIO(base64.b64decode(self.__face_u))).rotate(self.__config['rotation'][0]))
+        self.assertEqual(recognizer._Recognizer__face_images['L'],
+                         Image.open(BytesIO(base64.b64decode(self.__face_l))).rotate(self.__config['rotation'][1]))
+        self.assertEqual(recognizer._Recognizer__face_images['F'],
+                         Image.open(BytesIO(base64.b64decode(self.__face_f))).rotate(self.__config['rotation'][2]))
+        self.assertEqual(recognizer._Recognizer__face_images['R'],
+                         Image.open(BytesIO(base64.b64decode(self.__face_r))).rotate(self.__config['rotation'][3]))
+        self.assertEqual(recognizer._Recognizer__face_images['B'],
+                         Image.open(BytesIO(base64.b64decode(self.__face_b))).rotate(self.__config['rotation'][4]))
+        self.assertEqual(recognizer._Recognizer__face_images['D'],
+                         Image.open(BytesIO(base64.b64decode(self.__face_d))).rotate(self.__config['rotation'][5]))
 
         # Tne next image should give an exception
         with self.assertRaises(OverflowError):

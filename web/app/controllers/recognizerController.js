@@ -3,6 +3,20 @@ var RecognizerController = function ($scope, RecognizerService) {
     // Configuration model
     $scope.config = { };
 
+    // Rotation knob options
+    $scope.knobOptions = {
+        width: 48,
+        height: 48,
+        min: 0,
+        max: 360,
+        step: 90,
+        cursor: true,
+        bgColor: '#eee',
+        fgColor: '#000',
+        thickness: 0.3,
+        lineCap: 'round'
+    };
+
     $scope.sortableConfig = {
         ghostClass: 'order-item-ghost',
         chosenClass: 'order-item-chosen'
