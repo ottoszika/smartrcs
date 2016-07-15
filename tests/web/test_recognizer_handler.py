@@ -25,7 +25,7 @@ SAMPLE_RECOGNIZER_CONFIG = {'radius': 3, 'order': ['U', 'L', 'F', 'R', 'B', 'D']
                                         [1203, 543], [1542, 522], [879, 888], [1218, 876], [1548, 864]]}
 
 
-class TestCameraHandler(TestCase):
+class TestRecognizerHandler(TestCase):
 
     @staticmethod
     def get_http_port():
