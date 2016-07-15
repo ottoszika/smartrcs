@@ -1941,26 +1941,47 @@ class TestRecognizer(unittest.TestCase):
 
         self.assertEqual(config_no_types, self.__config)
 
-    def test_add_image(self):
+    def test_set_images(self):
+
+        # Create recognizer from the specified config
+        recognizer = Recognizer()
+        recognizer._config = self.__config
+
+        images = [
+            Image.open(BytesIO(base64.b64decode(self.__face_u))),
+            Image.open(BytesIO(base64.b64decode(self.__face_l))),
+            Image.open(BytesIO(base64.b64decode(self.__face_f))),
+            Image.open(BytesIO(base64.b64decode(self.__face_r))),
+            Image.open(BytesIO(base64.b64decode(self.__face_b))),
+            Image.open(BytesIO(base64.b64decode(self.__face_d)))
+        ]
+
+        recognizer.set_images(images)
+        self.assertEqual(len(recognizer._Recognizer__face_images), 6)
+
+        recognizer.set_images(images)
+        self.assertEqual(len(recognizer._Recognizer__face_images), 6)
+
+    def test___add_image(self):
 
         # Create recognizer from the specified config
         recognizer = Recognizer()
         recognizer._config = self.__config
 
         # Add some images
-        recognizer.add_image(Image.open(BytesIO(base64.b64decode(self.__face_u))))
-        recognizer.add_image(Image.open(BytesIO(base64.b64decode(self.__face_l))))
-        recognizer.add_image(Image.open(BytesIO(base64.b64decode(self.__face_f))))
-        recognizer.add_image(Image.open(BytesIO(base64.b64decode(self.__face_r))))
-        recognizer.add_image(Image.open(BytesIO(base64.b64decode(self.__face_b))))
-        recognizer.add_image(Image.open(BytesIO(base64.b64decode(self.__face_d))))
+        recognizer._Recognizer__add_image(Image.open(BytesIO(base64.b64decode(self.__face_u))))
+        recognizer._Recognizer__add_image(Image.open(BytesIO(base64.b64decode(self.__face_l))))
+        recognizer._Recognizer__add_image(Image.open(BytesIO(base64.b64decode(self.__face_f))))
+        recognizer._Recognizer__add_image(Image.open(BytesIO(base64.b64decode(self.__face_r))))
+        recognizer._Recognizer__add_image(Image.open(BytesIO(base64.b64decode(self.__face_b))))
+        recognizer._Recognizer__add_image(Image.open(BytesIO(base64.b64decode(self.__face_d))))
 
         # Check if 6 images were added
         self.assertEqual(len(recognizer._Recognizer__face_images), 6)
 
         # Tne next image should give an exception
         with self.assertRaises(OverflowError):
-            recognizer.add_image(Image.open(BytesIO(base64.b64decode(self.__face_d))))
+            recognizer._Recognizer__add_image(Image.open(BytesIO(base64.b64decode(self.__face_d))))
 
     def test___read_images(self):
 

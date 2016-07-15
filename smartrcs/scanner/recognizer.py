@@ -57,7 +57,21 @@ class Recognizer(Configurable):
             self._config['facelet'][i][0] = int(self._config['facelet'][i][0])
             self._config['facelet'][i][1] = int(self._config['facelet'][i][1])
 
-    def add_image(self, image):
+    def set_images(self, images):
+        """
+        Add images to recognizer
+
+        :param list images: Image list to be added
+        """
+
+        # Clear all images
+        self.__face_images = {}
+
+        # Add images
+        for image in images:
+            self.__add_image(image)
+
+    def __add_image(self, image):
         """
         Add image to recognizer
 
