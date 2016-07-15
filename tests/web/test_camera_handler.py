@@ -18,10 +18,7 @@ import json
 CONFIG_VALUE = None
 
 # Sample camera configuration
-SAMPLE_CAMERA_CONFIG = {'meter_mode': 'average', 'saturation': 0, 'image_effect': 'none', 'brightness': 50,
-                        'exposure_mode': 'auto', 'sharpness': 0, 'crop': [0.0, 0.0, 1.0, 1.0], 'awb_mode': 'auto',
-                        'ISO': 0, 'vflip': False, 'video_stabilization': False, 'color_effects': None, 'hflip': False,
-                        'rotation': 0, 'resolution': [2592, 1944], 'exposure_compensation': 0, 'contrast': 0}
+SAMPLE_CAMERA_CONFIG = {'port': 1, 'resolution': [1920, 1080]}
 
 
 class TestCameraHandler(TestCase):

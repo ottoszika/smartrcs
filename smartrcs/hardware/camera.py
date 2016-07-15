@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import picamera
-import io
+import cv2
+from cv2 import cv
 from PIL import Image
 from ..configurable.configurable import Configurable
 
@@ -20,7 +20,7 @@ class Camera(Configurable):
         Configurable.__init__(self)
 
         # Create camera instance
-        self.__camera = picamera.PiCamera()
+        self.__camera = None
 
     def load(self, config=None):
         """
@@ -31,26 +31,24 @@ class Camera(Configurable):
         # Load configuration
         Configurable.load(self, config)
 
-        # Set attributes from config
-        for key, value in self._config.iteritems():
-            setattr(self.__camera, key, value)
+        # Creating camera
+        self.__camera = cv2.VideoCapture(int(self._config['port']))
+
+        # Setting other attributes
+        self.__camera.set(cv.CV_CAP_PROP_FRAME_WIDTH, int(self._config['resolution'][0]))
+        self.__camera.set(cv.CV_CAP_PROP_FRAME_HEIGHT, int(self._config['resolution'][1]))
 
     def snapshot(self):
         """
         Take a snapshot
 
-        :return: The snaphot image
+        :return: The snapshot image
         :rtype: Image
         """
 
-        # Capture to stream
-        stream = io.BytesIO()
-        self.__camera.capture(stream, format='jpeg')
+        # Capture from camera and convert to PIL Image
+        _, cv2_im = self.__camera.read()
+        cv2_im = cv2.cvtColor(cv2_im, cv2.COLOR_BGR2RGB)
+        pil_im = Image.fromarray(cv2_im)
 
-        # "Rewind" the stream to the beginning so we can read its content
-        stream.seek(0)
-
-        # Create image from stream
-        image = Image.open(stream)
-
-        return image
+        return pil_im
