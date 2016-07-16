@@ -2,7 +2,12 @@
 
     <!-- Start of camera preview -->
     <div class="ui column">
-        <img class="ui fluid image rec-img" src="/api/recognizer?type=img" ng-click="selectImage($event)">
+        <img class="ui fluid image rec-img" ng-src="{{ cameraPreviewUrl }}" ng-click="selectImage($event)">
+        <br />
+        <button class="ui right floated button" ng-click="reloadImage()">
+            <i class="refresh icon"></i>
+            Reload image
+        </button>
     </div>
     <!-- End of camera preview -->
 

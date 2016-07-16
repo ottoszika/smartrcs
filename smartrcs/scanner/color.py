@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 import math
+from colormath.color_objects import XYZColor, sRGBColor, LabColor
+from colormath.color_conversions import convert_color
+from colormath.color_diff import delta_e_cie1976
 
 
 class Color(object):
@@ -29,13 +32,24 @@ class Color(object):
         :rtype: int
         """
 
-        # Calculating the square for each component
-        red_sqr = (color.red - self.red) ** 2
-        green_sqr = (color.green - self.green) ** 2
-        blue_sqr = (color.blue - self.blue) ** 2
+        # Making up first color
+        rgb_a = sRGBColor(float(self.red) / 0xff,
+                          float(self.green) / 0xff,
+                          float(self.blue) / 0xff)
 
-        # Formula for distance between two 3D points
-        return math.sqrt(red_sqr + green_sqr + blue_sqr)
+        # Making up first color
+        rgb_b = sRGBColor(float(color.red) / 0xff,
+                          float(color.green) / 0xff,
+                          float(color.blue) / 0xff)
+
+        # RGB to Lab
+        lab_a = convert_color(rgb_a, LabColor, target_illuminant='d50')
+        lab_b = convert_color(rgb_b, LabColor, target_illuminant='d50')
+
+        # Calculate Delta-E color distance
+        delta_e = delta_e_cie1976(lab_a, lab_b)
+
+        return delta_e
 
     def inverse(self):
         """

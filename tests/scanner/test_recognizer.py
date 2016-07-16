@@ -1980,7 +1980,6 @@ class TestRecognizer(unittest.TestCase):
         # Check if 6 images were added
         self.assertEqual(len(recognizer._Recognizer__face_images), 6)
 
-        # Check for correct rotations
         self.assertEqual(recognizer._Recognizer__face_images['U'],
                          Image.open(BytesIO(base64.b64decode(self.__face_u))).rotate(self.__config['rotation'][0]))
         self.assertEqual(recognizer._Recognizer__face_images['L'],
@@ -2042,8 +2041,8 @@ class TestRecognizer(unittest.TestCase):
         hash = m.hexdigest()
 
         # This should be the valid hash
-        valid = ('d23580640702b4244f964a81cd1d2e80a194d1c3686655d7c9c74c6062fef798'
-                 'a4c7d1bcbc8cede8f79d29aa2ec32ef948c182eb74de73a87fb81f11fdfdb755')
+        valid = ('5096b01d5e511a06d72e0a7668301e74cc679b377573f6df0c3eaca8975e4b3b'
+                 'e994dc1d10c4d3cf49aecd9cb9544064388caa3fb81b43f0e93612fe33cbccf8')
 
         # Test
         self.assertEqual(hash, valid)

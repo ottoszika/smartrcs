@@ -50,7 +50,7 @@ class TestColor(unittest.TestCase):
         dist = color1.distance_to(color2)
 
         # Float assertion
-        self.assertAlmostEqual(dist, 221.20804687, 6, 'Invalid distance')
+        self.assertAlmostEqual(dist, 145.301428570089, 6, 'Invalid distance')
 
     def test_inverse(self):
 

@@ -10,19 +10,22 @@ Tests for `recognizer_handler` module.
 
 from smartrcs.web.server import Server
 from smartrcs.configurable.configurable import Configurable
+from smartrcs.web.recognizer_handler import RecognizerHandler
 from twisted.trial.unittest import TestCase
 from twisted.internet import defer, reactor
 from cyclone import httpclient, httputil
 from PIL import Image
 import io
 import json
+import base64
 
 CONFIG_VALUE = None
 
 # Sample recognizer configuration
 SAMPLE_RECOGNIZER_CONFIG = {'radius': 3, 'order': ['U', 'L', 'F', 'R', 'B', 'D'],
                             'facelet': [[840, 192], [1188, 171], [1527, 165], [864, 552],
-                                        [1203, 543], [1542, 522], [879, 888], [1218, 876], [1548, 864]]}
+                                        [1203, 543], [1542, 522], [879, 888], [1218, 876], [1548, 864]],
+                            'rotation': [0, 0, 0, 0, 0, 0]}
 
 
 class TestRecognizerHandler(TestCase):
@@ -57,11 +60,16 @@ class TestRecognizerHandler(TestCase):
         global CONFIG_VALUE
         CONFIG_VALUE = obj._config
 
+    @staticmethod
+    def __get_snapshot_data(obj):
+        return base64.b64decode('R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==')
+
     def setUp(self, *args, **kwargs):
 
         # Mocking methods
         Configurable.load = self.load
         Configurable.save = self.save
+        RecognizerHandler._RecognizerHandler__get_snapshot_data = self.__get_snapshot_data
 
         self.__host = 'localhost'
         self.__port = self.get_http_port()

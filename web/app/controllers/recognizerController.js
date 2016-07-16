@@ -3,6 +3,8 @@ var RecognizerController = function ($scope, RecognizerService) {
     // Configuration model
     $scope.config = { };
 
+    $scope.cameraPreviewUrl = '/api/recognizer?type=img';
+
     // Rotation knob options
     $scope.knobOptions = {
         width: 48,
@@ -46,6 +48,8 @@ var RecognizerController = function ($scope, RecognizerService) {
         setTimeout(function () {
             $scope.saver = { active: false, success: null };
             $scope.$apply();
+
+            $scope.reloadImage();
         }, 800);
     }
 
@@ -68,7 +72,13 @@ var RecognizerController = function ($scope, RecognizerService) {
         RecognizerService.getConfiguration(function (data) {
             $scope.config = data;
             $scope.loader = { active: false, message: null };
+            $scope.reloadImage();
         });
+    }
+
+    // Reload image from server
+    $scope.reloadImage = function () {
+        $scope.cameraPreviewUrl = $scope.cameraPreviewUrl + '&t=' + new Date().getTime();
     }
 
     // Get click position within the image and modify the model
