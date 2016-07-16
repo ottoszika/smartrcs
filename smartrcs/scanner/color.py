@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-import math
-from colormath.color_objects import XYZColor, sRGBColor, LabColor
+from colormath.color_objects import sRGBColor, LabColor
 from colormath.color_conversions import convert_color
 from colormath.color_diff import delta_e_cie1976
 
