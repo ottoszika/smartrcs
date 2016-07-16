@@ -1957,6 +1957,9 @@ class TestRecognizer(unittest.TestCase):
             Image.open(BytesIO(base64.b64decode(self.__face_d)))
         ]
 
+        for image in images:
+            image.load()
+
         recognizer.set_images(images)
         self.assertEqual(len(recognizer._Recognizer__face_images), 6)
 
@@ -1970,28 +1973,46 @@ class TestRecognizer(unittest.TestCase):
         recognizer._config = self.__config
 
         # Add some images
-        recognizer._Recognizer__add_image(Image.open(BytesIO(base64.b64decode(self.__face_u))))
-        recognizer._Recognizer__add_image(Image.open(BytesIO(base64.b64decode(self.__face_l))))
-        recognizer._Recognizer__add_image(Image.open(BytesIO(base64.b64decode(self.__face_f))))
-        recognizer._Recognizer__add_image(Image.open(BytesIO(base64.b64decode(self.__face_r))))
-        recognizer._Recognizer__add_image(Image.open(BytesIO(base64.b64decode(self.__face_b))))
-        recognizer._Recognizer__add_image(Image.open(BytesIO(base64.b64decode(self.__face_d))))
+        images = [
+            Image.open(BytesIO(base64.b64decode(self.__face_u))),
+            Image.open(BytesIO(base64.b64decode(self.__face_l))),
+            Image.open(BytesIO(base64.b64decode(self.__face_f))),
+            Image.open(BytesIO(base64.b64decode(self.__face_r))),
+            Image.open(BytesIO(base64.b64decode(self.__face_b))),
+            Image.open(BytesIO(base64.b64decode(self.__face_d)))
+        ]
+
+        for image in images:
+            image.load()
+            recognizer._Recognizer__add_image(image)
 
         # Check if 6 images were added
         self.assertEqual(len(recognizer._Recognizer__face_images), 6)
 
-        self.assertEqual(recognizer._Recognizer__face_images['U'],
-                         Image.open(BytesIO(base64.b64decode(self.__face_u))).rotate(self.__config['rotation'][0]))
-        self.assertEqual(recognizer._Recognizer__face_images['L'],
-                         Image.open(BytesIO(base64.b64decode(self.__face_l))).rotate(self.__config['rotation'][1]))
-        self.assertEqual(recognizer._Recognizer__face_images['F'],
-                         Image.open(BytesIO(base64.b64decode(self.__face_f))).rotate(self.__config['rotation'][2]))
-        self.assertEqual(recognizer._Recognizer__face_images['R'],
-                         Image.open(BytesIO(base64.b64decode(self.__face_r))).rotate(self.__config['rotation'][3]))
-        self.assertEqual(recognizer._Recognizer__face_images['B'],
-                         Image.open(BytesIO(base64.b64decode(self.__face_b))).rotate(self.__config['rotation'][4]))
-        self.assertEqual(recognizer._Recognizer__face_images['D'],
-                         Image.open(BytesIO(base64.b64decode(self.__face_d))).rotate(self.__config['rotation'][5]))
+        # Check for correct rotation
+        image = Image.open(BytesIO(base64.b64decode(self.__face_u)))
+        image.load()
+        self.assertEqual(recognizer._Recognizer__face_images['U'], image.rotate(self.__config['rotation'][0]))
+
+        image = Image.open(BytesIO(base64.b64decode(self.__face_l)))
+        image.load()
+        self.assertEqual(recognizer._Recognizer__face_images['L'], image.rotate(self.__config['rotation'][1]))
+
+        image = Image.open(BytesIO(base64.b64decode(self.__face_f)))
+        image.load()
+        self.assertEqual(recognizer._Recognizer__face_images['F'], image.rotate(self.__config['rotation'][2]))
+
+        image = Image.open(BytesIO(base64.b64decode(self.__face_r)))
+        image.load()
+        self.assertEqual(recognizer._Recognizer__face_images['R'], image.rotate(self.__config['rotation'][3]))
+
+        image = Image.open(BytesIO(base64.b64decode(self.__face_b)))
+        image.load()
+        self.assertEqual(recognizer._Recognizer__face_images['B'], image.rotate(self.__config['rotation'][4]))
+
+        image = Image.open(BytesIO(base64.b64decode(self.__face_d)))
+        image.load()
+        self.assertEqual(recognizer._Recognizer__face_images['D'], image.rotate(self.__config['rotation'][5]))
 
         # Tne next image should give an exception
         with self.assertRaises(OverflowError):
