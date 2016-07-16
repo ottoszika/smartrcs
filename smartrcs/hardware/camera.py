@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
-import cv2
-from cv2 import cv
+try:
+    import cv2
+    from cv2 import cv
+except ImportError:
+    print 'OpneCV not installed!'
+
 from PIL import Image
 from ..configurable.configurable import Configurable
 
